@@ -12,7 +12,6 @@ class _AboutAppPageState extends State<AboutAppPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomSheet:  buttomSheet(context),
       drawer: drawer(context),
       appBar: AppBar(
         centerTitle: true,
@@ -21,28 +20,24 @@ class _AboutAppPageState extends State<AboutAppPage> {
         title: const Text("About - Jobfinders"),
       ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                decoration: const BoxDecoration(color: Colors.amber),
-                height: 400,
-                width: MediaQuery.of(context).size.width,
-                child: const Image(image: AssetImage("assets/logo.png")),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              const Text(
-                "Jobfinders",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const Text(
-                  "Jobfinders merupakan Aplikasi Lowongan Kerja (Job Portal) berbasis Android hadir sejak 2022 yang berfokus dibidang rekrutmen untuk mempermudah pencarian pekerjaan dan perekrutan karyawan")
-            ],
-          ),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(
+              "assets/logo.png",
+              width: MediaQuery.of(context).size.width,
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            const Text(
+              "Jobfinders",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const Text(
+                "Jobfinders merupakan Aplikasi Lowongan Kerja (Job Portal) berbasis Android hadir sejak 2022 yang berfokus dibidang rekrutmen untuk mempermudah pencarian pekerjaan dan perekrutan karyawan")
+          ],
         ),
       ),
     );

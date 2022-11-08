@@ -1,4 +1,5 @@
-import 'package:mini_project/pages/navbottom_bar.dart';
+
+import 'package:mini_project/pages/screens/welcome_page.dart';
 import 'package:mini_project/provider/job_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/provider/review_provider.dart';
@@ -21,9 +22,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: NavBottomBar(),
-      ),
+          debugShowCheckedModeBanner: false, home: WelcomePage()),
     );
   }
 }

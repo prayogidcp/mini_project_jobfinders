@@ -8,20 +8,6 @@ import '../pages/screens/home_page.dart';
 import '../pages/screens/job_page.dart';
 import '../pages/screens/review_page.dart';
 
-class MyWidgetApps extends StatefulWidget {
-  const MyWidgetApps({super.key});
-
-  @override
-  State<MyWidgetApps> createState() => _MyWidgetAppsState();
-}
-
-class _MyWidgetAppsState extends State<MyWidgetApps> {
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
 Widget drawer(BuildContext context) {
   return Container(
     color: Colors.white,
@@ -32,23 +18,13 @@ Widget drawer(BuildContext context) {
           color: Colors.orange[500],
           height: 200,
           width: double.infinity,
-          child: Column(children: [
-            Container(
-              margin: const EdgeInsets.all(10.0),
-              height: 120,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(image: AssetImage("assets/logo.png"))),
-            ),
-            const Text(
-              "Jobfinders",
-              style: TextStyle(color: Colors.white, fontSize: 20),
-            ),
-            Text(
-              "info@jobfinders.com",
-              style: TextStyle(color: Colors.grey[200], fontSize: 14),
-            ),
-          ]),
+          child: Container(
+            margin: const EdgeInsets.all(10.0),
+            height: 120,
+            decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(image: AssetImage("assets/logo.png"))),
+          ),
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,

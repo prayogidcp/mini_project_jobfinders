@@ -12,7 +12,6 @@ class ReviewPage extends StatefulWidget {
 }
 
 class _ReviewPageState extends State<ReviewPage> {
-  // final DatabaseHelper db = DatabaseHelper();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +20,23 @@ class _ReviewPageState extends State<ReviewPage> {
           backgroundColor: Colors.orange,
           child: const Icon(Icons.add),
           onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ContactusPage(),
-                ));
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    const ContactusPage(),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  final tween = Tween(
+                    begin: const Offset(1, 0),
+                    end: Offset.zero,
+                  );
+                  return SlideTransition(
+                    position: animation.drive(tween),
+                    child: child,
+                  );
+                },
+              ),
+            );
           },
         ),
         drawer: drawer(context),
@@ -38,47 +49,55 @@ class _ReviewPageState extends State<ReviewPage> {
         body: Consumer<ReviewProvider>(
           builder: (context, value, child) {
             final reviewItems = value.getitemReview;
-            return ListView.separated(
-                separatorBuilder: (context, index) {
-                  return const SizedBox(
-                    height: 10.0,
-                  );
-                },
-                itemCount: reviewItems.length,
-                itemBuilder: (context, index) {
-                  final itemReview = reviewItems[index];
-                  return ListTile(
-                      trailing: IconButton(
-                          onPressed: () {
-                            value.deleteReview(itemReview.id!);
-                          },
-                          icon: const Icon(
-                            Icons.delete,
-                            color: Colors.red,
-                          )),
-                      tileColor: Colors.yellow[200],
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      subtitle: Card(
-                        color: Colors.orange,
-                        elevation: 0,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.only(top: 5, left: 5, bottom: 5),
-                          child: Text(
-                            itemReview.suggestion,
-                            style: const TextStyle(color: Colors.white),
+            return reviewItems.isEmpty
+                ? const Center(
+                    child: Text(
+                    "There is no data!",
+                    style: TextStyle(fontSize: 30),
+                  ))
+                : ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(
+                        height: 10.0,
+                      );
+                    },
+                    itemCount: reviewItems.length,
+                    itemBuilder: (context, index) {
+                      final itemReview = reviewItems[index];
+                      return ListTile(
+                          trailing: IconButton(
+                              onPressed: () {
+                                value.deleteReview(itemReview.id!);
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              )),
+                          tileColor: Colors.yellow[200],
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          subtitle: Card(
+                            color: Colors.orange,
+                            elevation: 0,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 5, left: 5, bottom: 5),
+                              child: Text(
+                                itemReview.suggestion,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      title: Padding(
-                          padding: const EdgeInsets.only(left: 4),
-                          child: Text(
-                            "${itemReview.name} (${itemReview.email})",
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          )));
-                });
+                          title: Padding(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Text(
+                                "${itemReview.name} (${itemReview.email})",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              )));
+                    });
           },
-        ));
+        )
+        );
   }
 }

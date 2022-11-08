@@ -26,9 +26,9 @@ class _NavBottomBarState extends State<NavBottomBar> {
         bottomNavigationBar: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             backgroundColor: Colors.orange[50],
-            selectedItemColor: Colors.red.withOpacity(0.7),
+            selectedItemColor: Colors.black.withOpacity(0.7),
             unselectedItemColor: Colors.orange[400],
-            iconSize: 20,
+            iconSize: 25,
             currentIndex: currentIndex,
             onTap: (index) => setState(() => currentIndex = index),
             items: const [

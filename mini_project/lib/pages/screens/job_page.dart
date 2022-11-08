@@ -30,7 +30,6 @@ class _JobPageState extends State<JobPage> {
   Widget build(BuildContext context) {
     Provider.of<JobProvider>(context, listen: false).getJobs();
     final jobProvider = Provider.of<JobProvider>(context);
-
     return Scaffold(
       // bottomSheet: buttomSheet(context),
       drawer: drawer(context),
@@ -183,134 +182,131 @@ class _JobPageState extends State<JobPage> {
                               ],
                             ),
                           ),
-                          dense: true,
-                          leading: const Icon(Icons.work),
+                          leading: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Icon(Icons.work),
+                            ],
+                          ),
                           iconColor: Colors.orange,
-                          trailing: InkWell(
-                              onTap: () async {
-                                var translateItem = items.description;
-                                await showDialog<void>(
-                                  context: context,
-                                  barrierDismissible: true,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      content: SingleChildScrollView(
-                                        child: ListBody(
-                                          children: <Widget>[
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 6),
-                                              child: Text(
-                                                "Description",
-                                                style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
-                                              ),
-                                            ),
-                                            Html(
-                                              data: translateItem,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      actions: <Widget>[
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey[600],
+                          onTap: () async {
+                            var translateItem = items.description;
+                            await showDialog<void>(
+                              context: context,
+                              barrierDismissible: true,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  content: SingleChildScrollView(
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 6),
+                                          child: Text(
+                                            "Description",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20),
                                           ),
-                                          onPressed: () {
-                                            setState(() async {
-                                              final translated =
-                                                  await translateItem!
-                                                      .translate(
-                                                          from: 'de', to: 'en');
-                                              translateItem = translated.text;
-
-                                              await showDialog<void>(
-                                                context: context,
-                                                barrierDismissible: true,
-                                                builder:
-                                                    (BuildContext context) {
-                                                  return AlertDialog(
-                                                    content:
-                                                        SingleChildScrollView(
-                                                      child: ListBody(
-                                                        children: <Widget>[
-                                                          const Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 6),
-                                                            child: Text(
-                                                              "Description",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize: 20),
-                                                            ),
-                                                          ),
-                                                          Html(
-                                                            data: translateItem,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    actions: <Widget>[
-                                                      ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          backgroundColor:
-                                                              Colors.grey[600],
-                                                        ),
-                                                        onPressed: () {
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                        child:
-                                                            const Text("Close"),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              );
-                                            });
-                                          },
-                                          child: const Text("Translate"),
                                         ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.grey[600],
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text("Close"),
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.orange,
-                                          ),
-                                          onPressed: () {
-                                            Future<void>? launched;
-                                            final Uri toLaunch = Uri(
-                                                scheme: 'https',
-                                                host: 'www.arbeitnow.com',
-                                                path: "view/${items.slug}");
-                                            setState(() {
-                                              launched =
-                                                  _launchInBrowser(toLaunch);
-                                            });
-                                          },
-                                          child: const Text("Apply"),
+                                        Html(
+                                          data: translateItem,
                                         ),
                                       ],
-                                    );
-                                  },
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey[600],
+                                      ),
+                                      onPressed: () {
+                                        setState(() async {
+                                          final translated =
+                                              await translateItem!.translate(
+                                                  from: 'de', to: 'en');
+                                          translateItem = translated.text;
+
+                                          await showDialog<void>(
+                                            context: context,
+                                            barrierDismissible: true,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                content: SingleChildScrollView(
+                                                  child: ListBody(
+                                                    children: <Widget>[
+                                                      const Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 6),
+                                                        child: Text(
+                                                          "Description",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20),
+                                                        ),
+                                                      ),
+                                                      Html(
+                                                        data: translateItem,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                actions: <Widget>[
+                                                  ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor:
+                                                          Colors.grey[600],
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    child: const Text("Close"),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        });
+                                      },
+                                      child: const Text("Translate"),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey[600],
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("Close"),
+                                    ),
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.orange,
+                                      ),
+                                      onPressed: () {
+                                        Future<void>? launched;
+                                        final Uri toLaunch = Uri(
+                                            scheme: 'https',
+                                            host: 'www.arbeitnow.com',
+                                            path: "view/${items.slug}");
+                                        setState(() {
+                                          launched = _launchInBrowser(toLaunch);
+                                        });
+                                      },
+                                      child: const Text("Apply"),
+                                    ),
+                                  ],
                                 );
                               },
-                              child: const Icon(Icons.arrow_forward)),
+                            );
+                          },
+                          dense: true,
                         ),
                       ),
                     ],

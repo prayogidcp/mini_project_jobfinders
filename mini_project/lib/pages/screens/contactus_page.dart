@@ -1,5 +1,3 @@
-
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mini_project/models/review_model.dart';
@@ -124,7 +122,7 @@ class _ContactusPageState extends State<ContactusPage> {
                   maxLines: 5,
                   decoration: InputDecoration(
                     prefixIcon: Container(
-                        padding: const EdgeInsets.only(bottom: 85),
+                        padding: const EdgeInsets.only(bottom: 78),
                         child: const Icon(
                           Icons.note_add,
                           color: Colors.orange,
